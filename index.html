@@ -8,19 +8,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1 class="header">
-        HANGMAN
-    </h1>
-    <div class="select-cat">
-        <p>select a category to begin</p>
-        <div class="btn">
-            <button>Cities</button>
-            <button>Countries</button>
-            <button>Singers</button>
+    <div id="container">
+        <h1 class="header">
+            HANGMAN
+        </h1>
+        <div class="select-cat">
+            <p>select a category to begin</p>
+            <div class="btn">
+                <button id="btn1" class="cat-selectorBtn">Cities</button>
+                <button id="btn2" class="cat-selectorBtn">Countries</button>
+                <button id="btn3" class="cat-selectorBtn">Singers</button>
+            </div>
+        </div>
+        <div class="img">
+            <img src="media/empty-gallows.jpg">
         </div>
     </div>
-    <div class="img">
-        <img src="media/empty-gallows.jpg">
-    </div>
+    <script defer src="script.js"></script>
 </body>
 </html>
