@@ -10,6 +10,7 @@ body {
     display: grid;
     height: 100vh;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr 0.5fr 0.5fr;
+    
 }
 
 .header {
@@ -57,26 +58,60 @@ img {
 .second-row { 
     grid-row: 9/10;
     display: grid;
-     /* grid-template-columns: repeat(13, 1fr); */
+    /* grid-template-columns: repeat(13, 1fr); */
     
+}
+
+.one-row {
+    display: none;
 }
 
 
 @media only screen and (min-width: 768px) {
     
-    
+    .header {
+        color: grey;
+    }
     img {
-        width: 350px;
+        width: 250px;
     }
     
 }
 
 @media only screen and (min-width: 1024px) {
 
+    /* .first-row {
+        grid-row: 8/9;
+        
+        display: grid;
+        grid-template-columns: repeat(13, 1fr);
+        
+        
+    }
+    
+    .second-row { 
+        grid-row: 9/10;
+        display: grid;
+        grid-template-columns: repeat(13, 1fr);
+        
+        
+    } */
+
+    .first-row, .second-row {
+        display: none;
+    }
+    /* .second-row {
+        display: none;
+    } */
+
+    .one-row {
+        grid-row: 8/10;
+        display: grid;
+    }
     
 
     img {
-        width: 400px;
+        width: 250px;
     }
 
 
