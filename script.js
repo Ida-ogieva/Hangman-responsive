@@ -1,11 +1,17 @@
 /*----- constants -----*/
-const countries = ["algeria", "seychelles", "ghana"];
-const singers = ["dido", "pharell", "eagles"];
-const cities = ["london", "miami", "zihuatenejo"];
+const countries = ["ALGERIA", "SEYCHELLES", "GHANA"];
+const singers = ["DIDO", "PHARELL", "EAGLES"];
+const cities = ["LONDON", "MIAMI", "ZIHUATENEJO"];
 
 /*----- app's state (variables) -----*/
+let selection;
 let spot;
 let array;
+let word;
+
+let guess;
+
+let displayArray;
 let renderedText;
 let newArray = [];
 let wrongArray = [];
@@ -37,13 +43,48 @@ letters.addEventListener("click", displayGuesses)
 
 /*----- functions -----*/
 
-function displayGuesses(e){
-    console.log(e)
-    console.log(e.target.id)
-    let guess = document.getElementById(e.target.id)
-    guess.style.backgroundColor = "white";
-    console.log(guess.style.backgroundColor)
+function result(){
+    
+    console.log("this is the", selection)
+    if (word.includes(selection)){
+        console.log("the word has this letter", selection)
+    } else{
+        console.log("the word doesn't have this", selection)
+    }
+
 }
+
+function displayGuesses(e){
+    // console.log(e)
+    // console.log(e.target.id)
+    guess = document.getElementById(e.target.id)
+    selection = guess.textContent;
+    guess.style.backgroundColor = "grey";
+    // console.log("this is your guess", guess.textContent)
+    // console.log(typeof(guess.textContent))
+    
+    // let word = array[spot];
+
+
+    console.log("this is the word", word)
+    console.log(spot)
+    console.log("this is selection", selection)
+    result()
+    guessedLetters()       
+}
+
+function guessedLetters(){
+    for (let i=0; i < word.length; i++){
+        if (selection === word[i]) {
+            newArray[i] = selection;
+            console.log("THIS IS the new array", newArray);
+            displayArray = categoriesEl.innerText.split(' ');
+            displayArray[i] = selection;
+            categoriesEl.innerText = displayArray.join(' ');
+        }
+    }
+}
+
 
 function init(e){
     header.textContent = e.target.textContent;
@@ -63,54 +104,60 @@ function init(e){
     
     
     alphabetsArray.forEach(keyboard);
+    // displayMissingLetters();
     
-    categoriesEl.remove();
+    // categoriesEl.remove();
     
     const categoryId = String(e.target.id);
     if (categoryId === "cities"){
         array = cities;
-        console.log(array)
+        displayMissingLetters()
+        console.log("this is the cat id", array)
     } else if (categoryId === "countries"){
         array = countries;
+        displayMissingLetters()
         console.log(array)
     } else if (categoryId === "singers"){
         array = singers;
+        displayMissingLetters()
         console.log(array)
     }
+    
 }
+
 
 function keyboard(letter){
     
-    
-    // let button2 = document.createElement("div");
-    // button2.textContent = letter;
-    // button2.id = letter.toLowerCase();
-    // button2.style.border = "2px solid white";
-    // button2.style.color = "white";
-    // button2.style.backgroundColor = "pink"
-    // button2.style.textAlign = "center"
-    // button2.classList.add("one-row");
-    // lettersOneRow.appendChild(button2);
 
-    let button1 = document.createElement("div");
-    button1.textContent = letter;
-    button1.id = letter.toLowerCase();
-    button1.style.border = "2px solid white";
-    button1.style.color = "white";
-    button1.style.backgroundColor = "black";
-    button1.style.textAlign = "center"
+    let button = document.createElement("div");
+    button.textContent = letter;
+    button.id = letter.toLowerCase();
+    button.style.border = "2px solid white";
+    button.style.color = "white";
+    button.style.backgroundColor = "black";
+    button.style.textAlign = "center"
     if (alphabetsArray.indexOf(letter) <= 12){
-        button1.classList.add("first-row");
-        lettersFirstRow.appendChild(button1);
+        button.classList.add("first-row");
+        lettersFirstRow.appendChild(button);
     } else {
-        button1.classList.add("second-row");
-        lettersSecondRow.appendChild(button1);
+        button.classList.add("second-row");
+        lettersSecondRow.appendChild(button);
     }
-
-    
-    
     
 }
+
+function displayMissingLetters () {
+    spot = Math.floor(Math.random() * 3);
+    word  = array[spot];
+    let missingWord = word.split('');
+    for (var i = 0; i <missingWord.length; i++){
+        missingWord[i] = "_";
+    };
+    categoriesEl.classList.add("missing-word")
+    categoriesEl.textContent = missingWord.join(" ") 
+    
+}
+
 
 
 
